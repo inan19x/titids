@@ -6,3 +6,5 @@ System requirement:
 - php-5.4 or below
 - mysql-server
 - httpd or equivalent server
+
+Scripto Kiddo - 2009
