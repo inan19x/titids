@@ -13,7 +13,7 @@
 // Suricata fast.log location:
 $fastlog = "/var/log/suricata/fast.log";
 // MySQL database connection config:
-$filedbcon = "/path/to/titids/cron/mysql_connect.php";
+$filedbcon = "/path/to/titids/mysql_connect.php";
 //
 // ===================================================
 
