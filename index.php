@@ -38,7 +38,7 @@ if(isset($_SESSION["netadmin"])){
 
 include "mysql_connect.php";
 
-$sqlrecent="SELECT IP,Alert,Time FROM INTRUDERS ORDER BY Time DESC Limit 5";
+$sqlrecent="SELECT IP,Alert,Port,Time FROM INTRUDERS ORDER BY Time DESC Limit 5";
 $qryrecent=mysql_query($sqlrecent);
 $totalrecent=mysql_num_rows($qryrecent);
 
@@ -87,14 +87,14 @@ $qrystatsp=mysql_query($sqlstatsp);
 		<div id="entity">
 		<big><strong>Most recent attacking host</strong></big> <a href="."><img src="image/refresh.png" /></a><br>
 		<div id="ket">Host reported doing malicious activity recently</div>
-		<table style="border:solid 1px;width:615px;"><tr style="background-color:#aaaaaa;"><th>Time</th><th>Intruder IP</th><th>Attack Type</th><th>WHOIS?</th><th>Traceback</th></tr>
+		<table style="border:solid 1px;width:615px;"><tr style="background-color:#aaaaaa;"><th>Time</th><th>Intruder IP</th><th>Attack Type</th><th>Port</th></th><th>WHOIS?</th><th>Traceback</th></tr>
 		<?php
 		if($totalrecent==0){
 			echo "<tr style=\"background-color:#e5e5e5;\"><td colspan=\"5\"><font style=\"font-size:11px;color:#ff0000;\">Horray, no intruders detected!</td></tr>";
 		}
 		else{
 			while($rowrecent=mysql_fetch_array($qryrecent)){
-				echo "<tr style=\"background-color:#e5e5e5;\"><td align=\"leftt\">".$rowrecent[Time]."</td><td>".$rowrecent[IP]."</td><td align=\"left\">".$rowrecent[Alert]."</td><td align=\"center\"><a href=\"detail?ip=$rowrecent[IP]\" rel=\"facebox\" ><img src=\"image/whois.png\" /></a></td><td align=\"center\"><a href=\"traceroute?host=$rowrecent[IP]\" rel=\"facebox\" ><img src=\"image/traceroute.gif\" /></a></td></tr>";
+				echo "<tr style=\"background-color:#e5e5e5;\"><td align=\"leftt\">".$rowrecent[Time]."</td><td>".$rowrecent[IP]."</td><td align=\"left\">".$rowrecent[Alert]."</td><td align=\"center\">".$rowrecent[Port]."</td><td align=\"center\"><a href=\"detail?ip=$rowrecent[IP]\" rel=\"facebox\" ><img src=\"image/whois.png\" /></a></td><td align=\"center\"><a href=\"traceroute?host=$rowrecent[IP]\" rel=\"facebox\" ><img src=\"image/traceroute.gif\" /></a></td></tr>";
 			}
 		}
 		?>
