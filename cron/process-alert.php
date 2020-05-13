@@ -37,6 +37,18 @@ while (!feof($file)) {
                 $sql="insert into INTRUDERS(Time,Alert,IP,Protocol,Port) values ('$alerttime','$alert','$ip','$proto','$port');";
                 mysql_query($sql);
         }
+        
+// ====================================================================================
+//  Custom action, eg. redirect to honeypot for offensive Intruders on port 22 and 2222
+// ====================================================================================
+//
+//        if($port==22 or $port==2222){
+//                $honeypot_redir=shell_exec("/sbin/iptables -t nat -L PREROUTING -n | grep -i $ip | wc -l");
+//                if($honeypot_redir!=1){
+//                        shell_exec("/sbin/iptables -t nat -A PREROUTING -i eth0 -s $ip -p tcp --dport 22 -j REDIRECT --to-port 2222");
+//                }
+//        }
+        
 }
 ftruncate($file,0);
 fclose($file)
