@@ -1,0 +1,12 @@
+# TITIDS rules
+alert http $EXTERNAL_NET any -> $HOME_NET any (msg:"EICAR test file upload via HTTP detected"; content:"$EICAR-STANDARD-ANTIVIRUS-TEST-FILE!"; nocase; sid:100001; rev:1;)
+alert http $EXTERNAL_NET any -> $HOME_NET any (msg:"HTTP GET contain /etc/passwd in query string"; flow:to_server,established; content:"/etc/passwd"; http_uri; nocase; sid:1000002; rev:1;)
+alert http $EXTERNAL_NET any -> $HOME_NET any (msg:"HTTP POST payload contain SQL (SQLi attempt)"; flow:to_server,established; content:"%27+or+1%3D%271"; http_client_body; nocase; sid:1000003; rev:1;)
+alert http $EXTERNAL_NET any -> $HOME_NET any (msg:"HTTP GET contain script in query string"; flow:to_server,established; content:"script"; http_uri; nocase; sid:1000004; rev:1;)
+alert http $EXTERNAL_NET any -> $HOME_NET any (msg:"HTTP POST payload contain script (XSS attempt)"; flow:to_server,established; content:"script"; http_client_body; nocase; sid:1000005; rev:1;)
+alert tcp $HOME_NET any -> $EXTERNAL_NET any (msg:"Data exfiltration with pakeeet tools from Github"; flow:to_server,established; content:"pakeeet"; nocase; sid:1000006; rev:1;)
+alert tls $HOME_NET any -> $EXTERNAL_NET any (msg:"Linux meterpreter's TLS handshake match"; ja3_hash; content:"5d65ea3fb1d4aa7d826733d2f2cbbb1d"; sid:1000007; rev:1;)
+alert tls $HOME_NET any -> $EXTERNAL_NET any (msg:"Windows meterpreter's TLS handshake match"; ja3_hash; content:"72a589da586844d7f0818ce684948eea"; sid:1000008; rev:1;)
+alert http $EXTERNAL_NET any -> $HOME_NET any (msg:"Linux executable file upload via HTTP detected"; content:"|7f 45 4c 46|"; http_client_body; flow:to_server,established; sid:1000009; rev:2;)
+alert http any any -> any any (msg:"Windows executable file upload via HTTP detected"; content:"|4d 5a|"; http_client_body; flow:to_server,established; sid:1000010; rev:2;)
+alert http $EXTERNAL_NET any -> $HOME_NET any (msg:"Suspicious PHP file upload via HTTP detected"; content:"<?php"; http_client_body; flow:to_server,established; sid:1000011; rev:1;)
