@@ -3,7 +3,7 @@ Header("Content-Type:image/jpeg");
 
 include "../mysql_connect.php";
 
-$sqldetection = "SELECT COUNT(Alert) AS Total, Alert FROM INTRUDERS GROUP BY Alert ORDER BY Total DESC";
+$sqldetection = "SELECT COUNT(Alert) AS Total, Alert FROM INTRUDERS GROUP BY Alert ORDER BY Total DESC Limit 10";
 $qrydetection = mysql_query($sqldetection);
 $sqlsum = "SELECT COUNT(Alert) AS SUM FROM INTRUDERS";
 $qrysum = mysql_query($sqlsum);
@@ -52,7 +52,6 @@ $warna[6] = ImageColorAllocate($img,255,128,0);
 $warna[7] = ImageColorAllocate($img,0,150,255);
 $warna[8] = ImageColorAllocate($img,112,0,255);
 $warna[9] = ImageColorAllocate($img,128,255,0);
-$warna[10] = ImageColorAllocate($img,40,255,153);
 $hitam = ImageColorAllocate($img,0,0,0);
 $putih = ImageColorAllocate($img,255,255,255);
 ImageFill($img,0,0,$putih);
